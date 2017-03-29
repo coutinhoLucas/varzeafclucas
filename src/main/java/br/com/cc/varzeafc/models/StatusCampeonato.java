@@ -1,6 +1,5 @@
 package br.com.cc.varzeafc.models;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class StatusCampeonato extends Status{
