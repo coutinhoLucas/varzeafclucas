@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Inscricao {
 
+	private Integer id;
 	private Campeonato campeonato;
 	private Equipe equipe;
 	private Double valor;
@@ -58,6 +59,14 @@ public class Inscricao {
 
 	public void setJogadores(List<Jogador> jogadores) {
 		this.jogadores = jogadores;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 }

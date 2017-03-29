@@ -2,6 +2,7 @@ package br.com.cc.varzeafc.models;
 
 public class Scout {
 
+	private Integer id;
 	private Escalacao escalacao;
 	private TipoScout tipo;
 	private Integer quantidade;
@@ -37,6 +38,14 @@ public class Scout {
 
 	public void setTipo(TipoScout tipo) {
 		this.tipo = tipo;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	
 }

@@ -2,6 +2,7 @@ package br.com.cc.varzeafc.models;
 
 public class Usuario {
 
+	private Integer id;
 	private String login;
 	private String senha;
 	private Perfil perfil;
@@ -28,6 +29,14 @@ public class Usuario {
 
 	public void setPerfil(Perfil perfil) {
 		this.perfil = perfil;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 }

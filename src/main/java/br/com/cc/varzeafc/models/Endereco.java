@@ -2,6 +2,7 @@ package br.com.cc.varzeafc.models;
 
 public class Endereco {
 
+	private Integer id;
 	private String logradouro;
 	private String bairro;
 	private String complemento;
@@ -64,6 +65,14 @@ public class Endereco {
 
 	public void setNumero(String numero) {
 		this.numero = numero;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 }

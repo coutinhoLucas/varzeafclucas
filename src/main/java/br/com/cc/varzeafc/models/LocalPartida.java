@@ -4,6 +4,7 @@ import java.util.List;
 
 public class LocalPartida {
 
+	private Integer id;
 	private String nomeLocalPartida;
 	private Endereco endereco;
 	private List<Jogo> jogos;
@@ -30,6 +31,14 @@ public class LocalPartida {
 
 	public void setJogos(List<Jogo> jogos) {
 		this.jogos = jogos;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 }

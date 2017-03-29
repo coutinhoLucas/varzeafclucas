@@ -4,6 +4,7 @@ import java.util.List;
 
 public class Temporada {
 
+	private Integer id;
 	private List<Campeonato> campeonatos;
 	private int ano;
 
@@ -21,6 +22,14 @@ public class Temporada {
 
 	public void setAno(int ano) {
 		this.ano = ano;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 }
