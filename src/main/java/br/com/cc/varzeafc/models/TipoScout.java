@@ -4,7 +4,7 @@ public class TipoScout {
 
 	private Integer codigo;
 	private String sigla;
-	private String Descricao;
+	private String descricao;
 
 	public Integer getCodigo() {
 		return codigo;
@@ -15,11 +15,11 @@ public class TipoScout {
 	}
 
 	public String getDescricao() {
-		return Descricao;
+		return descricao;
 	}
 
 	public void setDescricao(String descricao) {
-		Descricao = descricao;
+		this.descricao = descricao;
 	}
 
 	public String getSigla() {

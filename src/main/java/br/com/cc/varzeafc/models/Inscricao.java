@@ -9,7 +9,7 @@ public class Inscricao {
 	private Campeonato campeonato;
 	private Equipe equipe;
 	private Double valor;
-	private LocalDate DataPagamento;
+	private LocalDate dataPagamento;
 	private String statusPagamento;
 	private List<Jogador> jogadores;
 
@@ -38,11 +38,11 @@ public class Inscricao {
 	}
 
 	public LocalDate getDataPagamento() {
-		return DataPagamento;
+		return dataPagamento;
 	}
 
 	public void setDataPagamento(LocalDate dataPagamento) {
-		DataPagamento = dataPagamento;
+		this.dataPagamento = dataPagamento;
 	}
 
 	public String getStatusPagamento() {

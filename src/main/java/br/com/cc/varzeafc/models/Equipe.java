@@ -9,7 +9,7 @@ public class Equipe {
 	private List<Campeonato> campeonatos;
 	private String nome;
 	private String sigla;
-	private LocalDate DataCriacao;
+	private LocalDate dataCriacao;
 	private Presidente presidente;
 	private List<Jogo> jogosMandante;
 	private List<Jogo> jogosVisitante;
@@ -47,11 +47,11 @@ public class Equipe {
 	}
 
 	public LocalDate getDataCriacao() {
-		return DataCriacao;
+		return dataCriacao;
 	}
 
 	public void setDataCriacao(LocalDate dataCriacao) {
-		DataCriacao = dataCriacao;
+		this.dataCriacao = dataCriacao;
 	}
 
 	public Presidente getPresidente() {
