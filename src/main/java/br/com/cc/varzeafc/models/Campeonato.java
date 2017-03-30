@@ -3,14 +3,34 @@ package br.com.cc.varzeafc.models;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Campeonato {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
 	private LocalDate dataCriacao;
+	@ManyToMany
+	@JoinTable(name = "CAMPEONATO_PATROCINADOR",
+	joinColumns= @JoinColumn(name ="campeonato_id"),
+		inverseJoinColumns = @JoinColumn(name = "patrocinador_id"))
 	private List<Patrocinador> patrocinadores;
+	
+	@ManyToOne
 	private Temporada temporada;
+	@ManyToOne
 	private StatusCampeonato status;
+	
 	private List<Equipe> equipes;
 	private List<Rodada> rodadas;
 
@@ -77,5 +97,4 @@ public class Campeonato {
 	public void setRodadas(List<Rodada> rodadas) {
 		this.rodadas = rodadas;
 	}
-
 }
