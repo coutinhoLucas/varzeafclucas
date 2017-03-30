@@ -1,11 +1,22 @@
 package br.com.cc.varzeafc.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+@Entity
 public class Presidente extends Usuario{
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
 	private String cpf;
 	private String cnpj;
+	
+	@OneToOne(mappedBy = "")
 	private Equipe equipe;
 
 	public String getNome() {

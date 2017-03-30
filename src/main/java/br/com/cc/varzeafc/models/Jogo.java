@@ -3,17 +3,33 @@ package br.com.cc.varzeafc.models;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Jogo {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	@ManyToOne
 	private Equipe equipeMandante;
+	@ManyToOne
 	private Equipe equipeVisitante;
 	private LocalDate dataDaPartida;
 	private Integer golsMandante;
 	private Integer golsVisitante;
+	@ManyToOne
 	private StatusJogo status;
+	@ManyToOne
 	private Rodada rodada;
+	@ManyToOne
 	private LocalPartida localDaPartida;
+	@ManyToMany(mappedBy="jogos")
 	private List<Jogador> jogadores;
 
 	public Integer getId() {

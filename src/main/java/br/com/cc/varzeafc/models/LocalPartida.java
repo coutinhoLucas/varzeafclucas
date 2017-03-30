@@ -2,11 +2,23 @@ package br.com.cc.varzeafc.models;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+@Entity
 public class LocalPartida {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nomeLocalPartida;
+	@OneToOne
 	private Endereco endereco;
+	@OneToMany(mappedBy="localDaPartida")
 	private List<Jogo> jogos;
 
 	public String getNomeLocalPartida() {

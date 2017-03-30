@@ -3,14 +3,25 @@ package br.com.cc.varzeafc.models;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
 public class Inscricao {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private Campeonato campeonato;
+	
 	private Equipe equipe;
 	private Double valor;
 	private LocalDate dataPagamento;
 	private String statusPagamento;
+	@OneToMany(mappedBy="inscricao")
 	private List<Jogador> jogadores;
 
 	public Campeonato getCampeonato() {
