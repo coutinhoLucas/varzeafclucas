@@ -21,7 +21,7 @@ public class Jogador {
 	private String nome;
 	private LocalDate dataNascimento;
 	@ManyToMany
-	@JoinTable(name = "JOGADOR_JOGO",
+	@JoinTable(name = "ESCALACAO",
 				joinColumns= @JoinColumn(name ="jogador_id"),
 				inverseJoinColumns = @JoinColumn(name = "jogo_id"))
 	private List<Jogo> jogos;

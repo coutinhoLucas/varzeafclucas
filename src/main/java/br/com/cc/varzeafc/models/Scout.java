@@ -11,18 +11,18 @@ public class Scout {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private Escalacao escalacao;
-	private TipoScout tipo;
+	/*private Escalacao escalacao;
+	private TipoScout tipo;*/
 	private Integer quantidade;
 	private String tempo;
 	
-	public Escalacao getEscalacao() {
+	/*public Escalacao getEscalacao() {
 		return escalacao;
 	}
 
 	public void setEscalacao(Escalacao escalacao) {
 		this.escalacao = escalacao;
-	}
+	}*/
 
 	public String getTempo() {
 		return tempo;
@@ -40,13 +40,13 @@ public class Scout {
 		this.quantidade = quantidade;
 	}
 
-	public TipoScout getTipo() {
+	/*public TipoScout getTipo() {
 		return tipo;
 	}
 
 	public void setTipo(TipoScout tipo) {
 		this.tipo = tipo;
-	}
+	}*/
 
 	public Integer getId() {
 		return id;

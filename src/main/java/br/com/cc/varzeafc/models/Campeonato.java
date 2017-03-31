@@ -3,7 +3,6 @@ package br.com.cc.varzeafc.models;
 import java.time.LocalDate;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,7 +13,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import org.hibernate.annotations.ManyToAny;
 
 @Entity
 public class Campeonato {
@@ -34,7 +32,7 @@ public class Campeonato {
 	@ManyToOne
 	private StatusCampeonato status;
 	@ManyToMany
-	@JoinTable(name = "Inscricao",
+	@JoinTable(name = "INSCRICAO",
 				joinColumns= @JoinColumn(name ="campeonato_id"),
 				inverseJoinColumns = @JoinColumn(name = "equipe_id"))
 	private List<Equipe> equipes;

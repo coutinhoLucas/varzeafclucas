@@ -5,7 +5,7 @@ public class Usuario {
 	private Integer id;
 	private String login;
 	private String senha;
-	private Perfil perfil;
+	//private Perfil perfil;
 
 	public String getLogin() {
 		return login;
@@ -23,14 +23,14 @@ public class Usuario {
 		this.senha = senha;
 	}
 
-	public Perfil getPerfil() {
+	/*public Perfil getPerfil() {
 		return perfil;
 	}
 
 	public void setPerfil(Perfil perfil) {
 		this.perfil = perfil;
 	}
-
+*/
 	public Integer getId() {
 		return id;
 	}

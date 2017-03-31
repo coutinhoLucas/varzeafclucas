@@ -1,41 +1,22 @@
 package br.com.cc.varzeafc.models;
 
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="ESCALACAO")
 public class Escalacao {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-	private Jogo jogo;
-	private Jogador jogador;
+	@EmbeddedId
+	private EscalacaoPK escalacaoPK;
 
-	public Integer getId() {
-		return id;
+	public EscalacaoPK getEscalacaoPK() {
+		return escalacaoPK;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	
-	public Jogo getJogo() {
-		return jogo;
-	}
-
-	public void setJogo(Jogo jogo) {
-		this.jogo = jogo;
-	}
-
-	public Jogador getJogador() {
-		return jogador;
-	}
-
-	public void setJogador(Jogador jogador) {
-		this.jogador = jogador;
+	public void setEscalacaoPK(EscalacaoPK escalacaoPK) {
+		this.escalacaoPK = escalacaoPK;
 	}
 
 }
