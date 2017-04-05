@@ -3,23 +3,25 @@ package br.com.cc.varzeafc.models;
 import java.time.LocalDate;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-
 @Table(name="INSCRICAO")
 public class Inscricao {
 
-	@EmbeddedId
-	private InscricaoFK inscricaoFK;
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	@ManyToOne
+	private Campeonato campeonato;
+	@ManyToOne
+	private Equipe equipe;
 	private Double valor;
 	private LocalDate dataPagamento;
 	private String statusPagamento;
@@ -58,5 +60,31 @@ public class Inscricao {
 	public void setJogadores(List<Jogador> jogadores) {
 		this.jogadores = jogadores;
 	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Campeonato getCampeonato() {
+		return campeonato;
+	}
+
+	public void setCampeonato(Campeonato campeonato) {
+		this.campeonato = campeonato;
+	}
+
+	public Equipe getEquipe() {
+		return equipe;
+	}
+
+	public void setEquipe(Equipe equipe) {
+		this.equipe = equipe;
+	}
+	
+	
 
 }
