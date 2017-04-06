@@ -20,7 +20,9 @@ public class Rodada {
 	private Integer numeroRodada;
 	@ManyToOne
 	private Campeonato campeonato;
-
+	@OneToMany(mappedBy="rodada")
+	private List<Noticia> noticias;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -51,6 +53,14 @@ public class Rodada {
 
 	public void setCampeonato(Campeonato campeonato) {
 		this.campeonato = campeonato;
+	}
+
+	public List<Noticia> getNoticias() {
+		return noticias;
+	}
+
+	public void setNoticias(List<Noticia> noticias) {
+		this.noticias = noticias;
 	}
 
 }
