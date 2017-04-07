@@ -16,7 +16,7 @@ public class Temporada {
 	private Integer id;
 	@OneToMany(mappedBy="temporada")
 	private List<Campeonato> campeonatos;
-	private int ano;
+	private String ano;
 
 	public List<Campeonato> getCampeonatos() {
 		return campeonatos;
@@ -26,11 +26,11 @@ public class Temporada {
 		this.campeonatos = campeonatos;
 	}
 
-	public int getAno() {
+	public String getAno() {
 		return ano;
 	}
 
-	public void setAno(int ano) {
+	public void setAno(String ano) {
 		this.ano = ano;
 	}
 

@@ -9,14 +9,11 @@ import javax.persistence.OneToOne;
 @Entity
 public class Presidente extends Usuario{
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
 	private String nome;
 	private String cpf;
 	private String cnpj;
 	
-	@OneToOne(mappedBy = "")
+	@OneToOne
 	private Equipe equipe;
 
 	public String getNome() {
@@ -50,13 +47,4 @@ public class Presidente extends Usuario{
 	public void setEquipe(Equipe equipe) {
 		this.equipe = equipe;
 	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
 }
