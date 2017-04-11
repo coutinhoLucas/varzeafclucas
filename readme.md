@@ -1,9 +1,25 @@
 #Some setup information :).
 
 ##Spring Security Setup
-In **SecurityConfiguration** you should setup your protected urls. After that, you should change your **UserDetailsServiceDAO** class and use a valid HQL query to load information about your users.
-  	
-##Spring JPA Setup
-In JPAConfiguration class you must setup your database name, login and password.
-  	
+Criar grupos e permissoes no banco
+
+insert into grupo(descricao,nome) values ('GRUPO DE ADMINISTRADORES' , 'ADMIN');
+insert into grupo(descricao,nome) values ('GRUPO DE PRESIDENTES' , 'PRESIDENTE');
+insert into grupo(descricao,nome) values ('GRUPO DE PUBLICADORES' , 'PUBLICADOR');
+
+insert into permissao(nome) values ('ADMIN');
+insert into permissao(nome) values ('PRESIDENTE');
+insert into permissao(nome) values ('PUBLICADOR');
+
+
+
+insert into GRUPO_PERMISSAO(grupos_id, permissoes_id) values (1,1);
+insert into GRUPO_PERMISSAO(grupos_id, permissoes_id) values (2,2);
+insert into GRUPO_PERMISSAO(grupos_id, permissoes_id) values (3,3);
+
+
+
+
+
+
 
