@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	<head>
+	    <title>Spring Security</title>
+
+	     <link th:href="@{/assets/css/bootstrap.min.css}" rel="stylesheet"/>
+
+	    <link th:href="@{/assets/css/bootstrap-theme.min.css}" rel="stylesheet"/>
+	</head>
+
+	<body style="background-color: #f9f9f9">
+		<div class="row">
+			<div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-lg-4 col-lg-offset-4">				
+				<div class="panel panel-info">
+					<div class="panel-heading">
+				    	<h3 class="panel-title">cadastro</h3>
+				  	</div>
+					<div class="panel-body">
+						<form th:action="@{/usuario/add}" method="post">
+							<div class="form-group">
+								<input name="nome" class="form-control" placeholder="Nome"/>
+							</div>
+						
+							<div class="form-group">
+								<input name="login" class="form-control" placeholder="Usuário"/>
+							</div>
+
+							<div class="form-group">
+								<input type="password" name="senha" class="form-control" placeholder="Senha"/>
+							</div>
+							
+							<div class="form-group">
+								<input type="text" name="cpf" class="form-control" placeholder="CPF"/>
+							</div>
+
+							<div class="form-group">
+								<button class="btn btn-primary btn-block">Ok</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script th:src="@{/assets/js/jquery-2.1.4.min.js}"></script>
+
+		<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+	</body>
+</html>

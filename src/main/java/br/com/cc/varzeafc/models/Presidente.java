@@ -9,6 +9,11 @@ import javax.persistence.OneToOne;
 @Entity
 public class Presidente extends Usuario{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private String nome;
 	private String cpf;
 	private String cnpj;

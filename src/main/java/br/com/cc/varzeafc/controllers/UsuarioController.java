@@ -1,34 +1,44 @@
 package br.com.cc.varzeafc.controllers;
 
-
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.cc.varzeafc.dao.UsuarioDao;
+import br.com.cc.varzeafc.daos.GrupoDAO;
+import br.com.cc.varzeafc.daos.UsuarioDAO;
+import br.com.cc.varzeafc.models.Grupo;
 import br.com.cc.varzeafc.models.Usuario;
 
 @Controller
-@RequestMapping("/usuario")
 public class UsuarioController {
-	
+
 	@Autowired
-	private UsuarioDao usuarioDao;
-	
-	@RequestMapping(method=RequestMethod.GET)
-	public ModelAndView login(){
-		return new ModelAndView("login/login");		
+	private UsuarioDAO usuarioDAO;
+
+	@Autowired
+	private GrupoDAO grupoDAO;
+
+	@RequestMapping(method = RequestMethod.GET, value = "/adm/addusuario")
+	public ModelAndView addUsuario(Usuario usuario) {
+		ModelAndView modelAndView = new ModelAndView("adm/add-usuario");
+		modelAndView.addObject("allGrupos", carregaGrupos());
+		return modelAndView;
 	}
-	
-	@RequestMapping(method=RequestMethod.POST)
-	public ModelAndView logon(Usuario usuario){
-		
-		Usuario autentica = usuarioDao.autentica(usuario);
-		
-		return new ModelAndView("login/login");		
+
+	private List<Grupo> carregaGrupos() {
+		return grupoDAO.all();
+	}
+
+	@RequestMapping(method = RequestMethod.POST, value = "/adm/addusuario")
+	public String add(Usuario usuario, final BindingResult bindingResult) {
+		usuario.setSenha(usuario.criptografarSenha(usuario.getSenha()));
+		usuarioDAO.salva(usuario);
+		return "redirect:/sistema";
 	}
 
 }

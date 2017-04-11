@@ -1,12 +1,15 @@
 package br.com.cc.varzeafc.conf;
 
-import org.springframework.context.annotation.Bean;
+import java.util.ArrayList;
+
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+import br.com.cc.varzeafc.models.Grupo;
 
 @Configuration
 @EnableWebMvc
@@ -14,18 +17,13 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 public class AppWebConfiguration extends WebMvcConfigurerAdapter
 {
 
-   @Override
-   public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer)
-   {
-      configurer.enable();
-   }
-
-   @Bean
-   public InternalResourceViewResolver internalResourceViewResolver()
-   {
-      InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-      resolver.setPrefix("/WEB-INF/views/");
-      resolver.setSuffix(".jsp");
-      return resolver;
-   }
+	@Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/assets/**").addResourceLocations("/assets/");
+    }
+	
+	@Override
+	public void addFormatters(FormatterRegistry registry) {
+		registry.addConverter(new StringToGrupoConverter(new ArrayList<Grupo>()));
+	}
 }
