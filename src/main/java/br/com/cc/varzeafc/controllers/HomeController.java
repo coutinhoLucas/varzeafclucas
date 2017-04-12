@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.cc.varzeafc.daos.UsuarioDAO;
+import br.com.cc.varzeafc.models.Equipe;
 import br.com.cc.varzeafc.models.Grupo;
 import br.com.cc.varzeafc.models.Presidente;
 import br.com.cc.varzeafc.models.Usuario;
@@ -37,7 +38,7 @@ public class HomeController {
 		grupos.add(grupo);
 
 		usuario.setGrupos(grupos);
-		usuario.setLogin("thiagortz");
+		usuario.setLogin("cesar");
 		usuario.setSenha(new BCryptPasswordEncoder().encode("123"));
 		usuarioDAO.salva(usuario);
 
@@ -50,7 +51,7 @@ public class HomeController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "cadastro")
-	public ModelAndView cadastro() {
+	public ModelAndView cadastro(Presidente presidente, Equipe equipe) {
 		return new ModelAndView("usuario/cadastro");
 	}
 

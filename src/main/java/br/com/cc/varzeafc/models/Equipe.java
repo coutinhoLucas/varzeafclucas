@@ -24,7 +24,7 @@ public class Equipe {
 	private String sigla;
 	private LocalDate dataCriacao;
 	@OneToOne
-    @JoinColumn(name = "presidenteId")
+    @JoinColumn(name = "presidente_id")
 	private Presidente presidente;
 	@OneToMany(mappedBy="equipeMandante")
 	private List<Jogo> jogosMandante;
