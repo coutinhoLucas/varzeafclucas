@@ -21,8 +21,7 @@ public class Presidente extends Usuario {
 	private String cpf;
 	private String rg;
 	private String email;
-
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(cascade=CascadeType.ALL, mappedBy="presidente")
 	private Equipe equipe;
 
 	public String getNome() {

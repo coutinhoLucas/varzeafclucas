@@ -1,6 +1,7 @@
 package br.com.cc.varzeafc.models;
 
 import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -11,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Equipe {
@@ -18,17 +21,18 @@ public class Equipe {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	@ManyToMany(mappedBy="equipes")
+	@ManyToMany(mappedBy = "equipes")
 	private List<Campeonato> campeonatos;
 	private String nome;
 	private String sigla;
-	private LocalDate dataCriacao;
+	@Temporal(TemporalType.DATE)
+	private Calendar dataCriacao;
 	@OneToOne
-    @JoinColumn(name = "presidente_id")
+	@JoinColumn(name = "presidente_id")
 	private Presidente presidente;
-	@OneToMany(mappedBy="equipeMandante")
+	@OneToMany(mappedBy = "equipeMandante")
 	private List<Jogo> jogosMandante;
-	@OneToMany(mappedBy="equipeVisitante")
+	@OneToMany(mappedBy = "equipeVisitante")
 	private List<Jogo> jogosVisitante;
 
 	public Integer getId() {
@@ -38,7 +42,7 @@ public class Equipe {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
+
 	public List<Campeonato> getCampeonatos() {
 		return campeonatos;
 	}
@@ -63,11 +67,11 @@ public class Equipe {
 		this.sigla = sigla;
 	}
 
-	public LocalDate getDataCriacao() {
+	public Calendar getDataCriacao() {
 		return dataCriacao;
 	}
 
-	public void setDataCriacao(LocalDate dataCriacao) {
+	public void setDataCriacao(Calendar dataCriacao) {
 		this.dataCriacao = dataCriacao;
 	}
 

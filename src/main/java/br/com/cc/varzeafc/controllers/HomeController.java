@@ -1,6 +1,7 @@
 package br.com.cc.varzeafc.controllers;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.cc.varzeafc.daos.UsuarioDAO;
-import br.com.cc.varzeafc.models.Equipe;
 import br.com.cc.varzeafc.models.Grupo;
 import br.com.cc.varzeafc.models.Presidente;
 import br.com.cc.varzeafc.models.Usuario;
 
 @Controller
-@RequestMapping("/")
 public class HomeController {
 
 	@Autowired
@@ -28,7 +27,7 @@ public class HomeController {
 		return "index";
 	}
 
-	@RequestMapping("add")
+	@RequestMapping("/add")
 	public String addAdm() {
 
 		Usuario usuario = new Usuario();
@@ -42,25 +41,27 @@ public class HomeController {
 		usuario.setSenha(new BCryptPasswordEncoder().encode("123"));
 		usuarioDAO.salva(usuario);
 
-		return "redirect:/login/login";
+		return "redirect:/login";
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "login")
+	@RequestMapping(method = RequestMethod.GET, value = "/login")
 	public ModelAndView login() {
 		return new ModelAndView("login/login");
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "cadastro")
-	public ModelAndView cadastro(Presidente presidente, Equipe equipe) {
+	@RequestMapping(method = RequestMethod.GET, value = "/cadastro")
+	public ModelAndView cadastro(Presidente presidente) {
 		return new ModelAndView("usuario/cadastro");
 	}
 
-	@RequestMapping(method = RequestMethod.POST, value = "usuario/add")
+	@RequestMapping(method = RequestMethod.POST, value = "/usuario/add")
 	public String addPresidente(Presidente presidente) {
 		presidente.setGrupos(addGrupo());
+		presidente.getEquipe().setDataCriacao(Calendar.getInstance());
 		presidente.setSenha(presidente.criptografarSenha(presidente.getSenha()));
+		presidente.getEquipe().setPresidente(presidente);
 		usuarioDAO.salva(presidente);
-		return "redirect:/login/login";
+		return "redirect:/login";
 	}
 
 	private List<Grupo> addGrupo() {
@@ -71,7 +72,7 @@ public class HomeController {
 		return grupos;
 	}
 
-	@RequestMapping("sistema")
+	@RequestMapping("/sistema")
 	public String sistema() {
 		return "sistema";
 	}
