@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +16,7 @@ import br.com.cc.varzeafc.models.Grupo;
 import br.com.cc.varzeafc.models.Usuario;
 
 @Controller
+@Transactional
 public class UsuarioController {
 
 	@Autowired
@@ -23,9 +25,9 @@ public class UsuarioController {
 	@Autowired
 	private GrupoDAO grupoDAO;
 
-	@RequestMapping(method = RequestMethod.GET, value = "/adm/addusuario")
+	@RequestMapping(method = RequestMethod.GET, value = "/admin/usuario")
 	public ModelAndView addUsuario(Usuario usuario) {
-		ModelAndView modelAndView = new ModelAndView("adm/add-usuario");
+		ModelAndView modelAndView = new ModelAndView("admin/add-usuario");
 		modelAndView.addObject("allGrupos", carregaGrupos());
 		return modelAndView;
 	}
@@ -34,7 +36,7 @@ public class UsuarioController {
 		return grupoDAO.all();
 	}
 
-	@RequestMapping(method = RequestMethod.POST, value = "/adm/addusuario")
+	@RequestMapping(method = RequestMethod.POST, value = "/admin/add")
 	public String add(Usuario usuario, final BindingResult bindingResult) {
 		usuario.setSenha(usuario.criptografarSenha(usuario.getSenha()));
 		usuarioDAO.salva(usuario);

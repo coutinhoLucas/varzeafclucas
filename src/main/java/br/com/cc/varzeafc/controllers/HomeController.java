@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,6 +18,7 @@ import br.com.cc.varzeafc.models.Presidente;
 import br.com.cc.varzeafc.models.Usuario;
 
 @Controller
+@Transactional
 public class HomeController {
 
 	@Autowired
@@ -37,7 +39,7 @@ public class HomeController {
 		grupos.add(grupo);
 
 		usuario.setGrupos(grupos);
-		usuario.setLogin("cesar");
+		usuario.setLogin("thiago");
 		usuario.setSenha(new BCryptPasswordEncoder().encode("123"));
 		usuarioDAO.salva(usuario);
 

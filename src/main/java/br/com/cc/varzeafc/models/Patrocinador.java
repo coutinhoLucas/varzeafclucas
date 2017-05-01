@@ -8,20 +8,30 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.Expose;
+
 @Entity
 public class Patrocinador {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Expose
 	private Integer id;
+	@Expose
 	private String nome;
+	@Expose
 	private String cpf;
+	@Expose
 	private String cnpj;
+	@Expose
 	private String nomeRepresentante;
+	@Expose
 	private String telefoneRepresentante;
-	@ManyToMany(mappedBy="patrocinadores")
+	@ManyToMany(mappedBy = "patrocinadores", fetch = javax.persistence.FetchType.LAZY)
 	private List<Campeonato> campeonatos;
-		
+
 	public Integer getId() {
 		return id;
 	}
@@ -76,6 +86,11 @@ public class Patrocinador {
 
 	public void setCampeonatos(List<Campeonato> campeonatos) {
 		this.campeonatos = campeonatos;
+	}
+
+	public String toJson() {
+		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+		return gson.toJson(this);
 	}
 
 }

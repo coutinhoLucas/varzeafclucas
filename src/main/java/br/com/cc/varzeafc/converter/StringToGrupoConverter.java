@@ -1,4 +1,4 @@
-package br.com.cc.varzeafc.conf;
+package br.com.cc.varzeafc.converter;
 
 import java.util.List;
 

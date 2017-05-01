@@ -45,3 +45,21 @@ $(function() {
         }
     }
 });
+
+var patrocinador = {
+		editar: function(id){
+			$.get("/varzeafc/patrocinador/"+id, function(data) {
+				$('#nome').val(data.nome);
+				$('#modalPatrocinadorTitle').html('Editando patrocinador ' + data.nome)
+				$('#nomeRepresentante').val(data.nomeRepresentante);
+				$('#cpf').val(data.cpf);
+				$('#cnpj').val(data.cnpj);
+				$('#telefoneRepresentante').val(data.telefoneRepresentante);
+				$('#formUpdatePatrocinador').attr('action', '/varzeafc/patrocinador/'+id);
+				$('#modalEditPatrocinador').modal('show');
+				
+			});
+			
+		}
+		
+}

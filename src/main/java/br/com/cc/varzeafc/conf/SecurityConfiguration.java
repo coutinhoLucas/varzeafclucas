@@ -20,7 +20,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 			.antMatchers("/","/add", "/cadastro", "/usuario/add").permitAll()
 			.antMatchers("/sistema").hasAnyRole("PRESIDENTE","PUBLICADOR","ADMIN")
-			.antMatchers("/addAdm","/adm/add").hasAnyRole("ADMIN")
+			.antMatchers("/admin/add","/admin/usuario","/patrocinadores", "/patrocinador").hasAnyRole("ADMIN")
 			.anyRequest().authenticated()
 					.and()
 						.formLogin().loginPage("/login").defaultSuccessUrl("/sistema").permitAll()
