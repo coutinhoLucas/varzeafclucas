@@ -1,5 +1,6 @@
 package br.com.cc.varzeafc.daos;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -9,6 +10,8 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import br.com.cc.varzeafc.models.Campeonato;
+import br.com.cc.varzeafc.models.Patrocinador;
+import br.com.cc.varzeafc.models.Temporada;
 
 @Repository
 public class CampeonatoDAO {
@@ -18,6 +21,10 @@ public class CampeonatoDAO {
 
 	public void salva(Campeonato campeonato) {
 		manager.persist(campeonato);
+	}
+	
+	public void salva(Temporada temporada) {
+		manager.persist(temporada);
 	}
 
 	public List<Campeonato> listarTodos() {
@@ -40,6 +47,12 @@ public class CampeonatoDAO {
 	public void excluir(Campeonato campeonato) {
 		manager.remove(campeonato);
 
+	}
+
+	public List<Temporada> listarTodasTemporadasAtivas() {
+		return manager.createQuery("select t from Temporada t where cast(t.ano as int) >= :ano", Temporada.class)
+				.setParameter("ano", LocalDate.now().getYear()).getResultList();
+		
 	}
 
 }

@@ -24,6 +24,7 @@ import br.com.cc.varzeafc.daos.PatrocionadorDAO;
 import br.com.cc.varzeafc.models.Campeonato;
 import br.com.cc.varzeafc.models.CampeonatoStatus;
 import br.com.cc.varzeafc.models.Patrocinador;
+import br.com.cc.varzeafc.models.Temporada;
 
 @Controller
 @Transactional
@@ -31,7 +32,7 @@ public class CampeonatoController {
 
 	@Autowired
 	private CampeonatoDAO campeonatoDAO;
-	
+
 	@Autowired
 	private PatrocionadorDAO patrocionadorDAO;
 
@@ -40,11 +41,16 @@ public class CampeonatoController {
 		ModelAndView view = new ModelAndView("campeonato/add-campeonato");
 		view.addObject("patrocinadores", carregaPatrocinadores());
 		view.addObject("status", Arrays.asList(CampeonatoStatus.values()));
+		view.addObject("temporadas", carregaTemporadasAtivas());
 		return view;
 	}
-	
+
 	private List<Patrocinador> carregaPatrocinadores() {
 		return patrocionadorDAO.listarTodos();
+	}
+	
+	private List<Temporada> carregaTemporadasAtivas() {
+		return campeonatoDAO.listarTodasTemporadasAtivas();
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/campeonato")
@@ -79,14 +85,14 @@ public class CampeonatoController {
 	@RequestMapping(method = RequestMethod.POST, value = "/campeonato/{id}")
 	@CacheEvict(value = "campeonatos", allEntries = true)
 	public ModelAndView update(@Valid Campeonato campeonato, BindingResult bindingResult) {
-		
+
 		if (bindingResult.hasErrors()) {
 			return list(campeonato);
 
 		}
-		
+
 		campeonatoDAO.atualizaCampeonato(campeonato);
-		return  new ModelAndView("redirect:/campeonatos");
+		return new ModelAndView("redirect:/campeonatos");
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/campeonato/excluir/{id}")
@@ -95,6 +101,24 @@ public class CampeonatoController {
 		Campeonato campeonato = campeonatoDAO.buscaPorId(id);
 		campeonatoDAO.excluir(campeonato);
 		return "redirect:/campeonatos";
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "/temporada")
+	public ModelAndView form(Temporada temporada) {
+		ModelAndView view = new ModelAndView("campeonato/add-temporada");
+		return view;
+	}
+
+	@RequestMapping(method = RequestMethod.POST, value = "/temporada")
+	public ModelAndView add(@Valid Temporada temporada, BindingResult bindingResult,
+			RedirectAttributes redirectAttributes) {
+		if (bindingResult.hasErrors()) {
+			return form(temporada);
+		}
+		campeonatoDAO.salva(temporada);
+
+		redirectAttributes.addFlashAttribute("mensagem", "Temporada cadastrada com sucesso.");
+		return new ModelAndView("redirect:temporada");
 	}
 
 }

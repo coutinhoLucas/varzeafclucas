@@ -3,14 +3,14 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{templates/administracao/layout}">
 <head>
-<title>Adicionar campeonato</title>
+<title>Adicionar Temporada</title>
 </head>
 <body>
 	<div layout:fragment="content">
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Campeonato</h1>
+					<h1 class="page-header">Temporada</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -23,8 +23,8 @@
 							<div class="row">
 								<div class="col-lg-2"></div>
 								<div class="col-lg-8">
-									<form role="form" th:action="@{/campeonato}"
-										th:object="${campeonato}" method="POST">
+									<form role="form" th:action="@{/temporada}"
+										th:object="${temporada}" method="POST">
 										<div class="alert alert-success" th:text="${mensagem}"
 											th:if="${not #strings.isEmpty(mensagem)}"></div>
 
@@ -35,41 +35,13 @@
 											</div>
 										</div>
 										<div class="form-group aw-required"
-											th:classappend="${#fields.hasErrors('nome')} ? has-error">
+											th:classappend="${#fields.hasErrors('ano')} ? has-error">
 											<div class="form-group">
-												<input placeholder="NOME" th:field="*{nome}"
+												<input placeholder="Ano" th:field="*{ano}"
 													class="form-control" autofocus="autofocus" />
 
 											</div>
 										</div>
-										<div class="form-group">
-											<label for="grupo">Patrocinador</label> 
-											<select class="form-control"
-												th:field="*{patrocinadores}" multiple="multiple">
-												<option th:each="patrocinador : ${patrocinadores}"
-													th:text="${patrocinador.nome}" th:value="${{patrocinador}}">1</option>
-											</select>
-
-										</div>
-										<div class="form-group">
-											<label for="grupo">Temporada</label> 
-											<select class="form-control"
-												th:field="*{temporada}">
-												<option th:each="temporada : ${temporadas}"
-													th:text="${temporada.ano}" th:value="${{temporada}}">1</option>
-											</select>
-
-										</div>
-										<div class="form-group">
-											<label for="grupo">Status</label> 
-											<select class="form-control"
-												th:field="*{status}">
-												<option th:each="status : ${status}"
-													th:text="${status.descricao}" th:value="${status}">1</option>
-											</select>
-
-										</div>
-
 										<button type="submit" class="btn btn-default">Submit
 											Button</button>
 										<button type="reset" class="btn btn-default">Reset

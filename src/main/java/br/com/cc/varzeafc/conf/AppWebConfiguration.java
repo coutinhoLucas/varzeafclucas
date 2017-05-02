@@ -18,6 +18,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import br.com.cc.varzeafc.formatter.GrupoFormatter;
 import br.com.cc.varzeafc.formatter.PatrocinadorFormatter;
 import br.com.cc.varzeafc.formatter.StringToGrupoConverter;
+import br.com.cc.varzeafc.formatter.TemporadaFormatter;
 import br.com.cc.varzeafc.models.Grupo;
 
 @Configuration
@@ -36,6 +37,7 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 		/*registry.addConverter(new StringToGrupoConverter(new ArrayList<Grupo>()));*/
 		registry.addFormatter(new PatrocinadorFormatter());
 		registry.addFormatter(new GrupoFormatter());
+		registry.addFormatter(new TemporadaFormatter());
 	}
 
 	@Bean
