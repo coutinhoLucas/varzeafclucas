@@ -15,7 +15,9 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import br.com.cc.varzeafc.converter.StringToGrupoConverter;
+import br.com.cc.varzeafc.formatter.GrupoFormatter;
+import br.com.cc.varzeafc.formatter.PatrocinadorFormatter;
+import br.com.cc.varzeafc.formatter.StringToGrupoConverter;
 import br.com.cc.varzeafc.models.Grupo;
 
 @Configuration
@@ -31,14 +33,16 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 
 	@Override
 	public void addFormatters(FormatterRegistry registry) {
-		registry.addConverter(new StringToGrupoConverter(new ArrayList<Grupo>()));
+		/*registry.addConverter(new StringToGrupoConverter(new ArrayList<Grupo>()));*/
+		registry.addFormatter(new PatrocinadorFormatter());
+		registry.addFormatter(new GrupoFormatter());
 	}
 
 	@Bean
 	public CacheManager cacheManager() {
 		final SimpleCacheManager cacheManager = new SimpleCacheManager();
 		cacheManager
-				.setCaches(Arrays.asList(new ConcurrentMapCache("patrocinadores")));
+				.setCaches(Arrays.asList(new ConcurrentMapCache("patrocinadores"), new ConcurrentMapCache("campeonatos")));
 		return cacheManager;
 	}
 }

@@ -3,14 +3,14 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{templates/administracao/layout}">
 <head>
-<title>Adicionar patrocinador</title>
+<title>Adicionar campeonato</title>
 </head>
 <body>
 	<div layout:fragment="content">
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Patrocinador</h1>
+					<h1 class="page-header">Campeonato</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -23,8 +23,8 @@
 							<div class="row">
 								<div class="col-lg-2"></div>
 								<div class="col-lg-8">
-									<form role="form" th:action="@{/patrocinador}"
-										th:object="${patrocinador}" method="POST">
+									<form role="form" th:action="@{/campeonato}"
+										th:object="${campeonato}" method="POST">
 										<div class="alert alert-success" th:text="${mensagem}"
 											th:if="${not #strings.isEmpty(mensagem)}"></div>
 
@@ -42,34 +42,24 @@
 
 											</div>
 										</div>
-										<div class="form-group aw-required"
-											th:classappend="${#fields.hasErrors('nomeRepresentante')} ? has-error">
-											<div class="form-group">
-												<input class="form-control" th:field="*{nomeRepresentante}"
-													placeholder="NOME REPRESENTANTE">
-											</div>
-										</div>
-										<div class="form-group aw-required"
-											th:classappend="${#fields.hasErrors('cpf')} ? has-error">
-											<div class="form-group">
-												<input class="form-control" th:field="*{cpf}"
-													placeholder="CPF">
-											</div>
-										</div>
-
 										<div class="form-group">
-											<input class="form-control" th:field="*{cnpj}"
-												placeholder="CNPJ">
-										</div>
-										<div class="form-group aw-required"
-											th:classappend="${#fields.hasErrors('telefoneRepresentante')} ? has-error">
-											<div class="form-group">
-												<input class="form-control"
-													th:field="*{telefoneRepresentante}"
-													placeholder="TELEFONE REPRESENTANTE">
-											</div>
-										</div>
+											<label for="grupo">Patrocinador</label> 
+											<select class="form-control"
+												th:field="*{patrocinadores}" multiple="multiple">
+												<option th:each="patrocinador : ${patrocinadores}"
+													th:text="${patrocinador.nome}" th:value="${{patrocinador}}">1</option>
+											</select>
 
+										</div>
+										<div class="form-group">
+											<label for="grupo">Status</label> 
+											<select class="form-control"
+												th:field="*{status}">
+												<option th:each="status : ${status}"
+													th:text="${status.descricao}" th:value="${status}">1</option>
+											</select>
+
+										</div>
 
 										<button type="submit" class="btn btn-default">Submit
 											Button</button>

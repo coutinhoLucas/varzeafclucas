@@ -7,6 +7,12 @@ $(function() {
     $('#side-menu').metisMenu();
 });
 
+$(document).ready(function() {
+	if($('.erroValidateCampeonato').length){
+		$('.editarCampeonato').click();
+	}
+});
+
 //Loads the correct sidebar on window load,
 //collapses the sidebar on window resize.
 // Sets the min-height of #page-wrapper to window size
@@ -58,6 +64,33 @@ var patrocinador = {
 				$('#formUpdatePatrocinador').attr('action', '/varzeafc/patrocinador/'+id);
 				$('#modalEditPatrocinador').modal('show');
 				
+			});
+			
+		}
+		
+}
+
+
+var campeonato = {
+		editar: function(id){
+			$.get("/varzeafc/campeonato/"+id, function(data) {
+				$('#formUpdateCampeonato').attr('action', '/varzeafc/campeonato/'+id);
+				$('.nomeCampeonato').val(data.nome);
+				
+				var selectStatus = $('#status');
+				selectStatus.find('option').remove();
+				
+				selectStatus.append($('<option/>', {value: data.status, text: data.status}));
+				
+				$.each(data.TodosStaus.replace(/\"/g,"").split('[')[1].split(']')[0].split(','), function(i, item){
+					
+					if(item != data.status){
+						selectStatus.append($('<option />', {value: item, text: item}));
+					}
+					
+		  		});
+				
+				$('#modalEditCampeonato').modal('show');
 			});
 			
 		}

@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.Cascade;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 public class Presidente extends Usuario {
@@ -17,9 +18,13 @@ public class Presidente extends Usuario {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@NotBlank(message= "nome é obrigatório")
 	private String nome;
+	@NotBlank(message= "cpf é obrigatório")
 	private String cpf;
+	@NotBlank(message= "rg é obrigatório")
 	private String rg;
+	@NotBlank(message= "email é obrigatório")
 	private String email;
 	@OneToOne(cascade=CascadeType.ALL, mappedBy="presidente")
 	private Equipe equipe;

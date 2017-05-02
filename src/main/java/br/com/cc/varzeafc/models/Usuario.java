@@ -3,40 +3,43 @@ package br.com.cc.varzeafc.models;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.ElementCollection;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import br.com.cc.varzeafc.validation.Login;
+
 @Entity
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Usuario implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
+	@NotBlank(message = "Login é obrigatório")
+	@Column(name = "login", unique = true)
+	@Login(message = "Login já existe")
 	private String login;
-	
+	@NotBlank(message = "Senha é obrigatório")
 	private String senha;
-	
-	
+
 	@ManyToMany
 	private List<Grupo> grupos;
-	
+
 	@ManyToMany
 	private List<Permissao> permissoes;
 
@@ -55,15 +58,15 @@ public class Usuario implements Serializable {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	
+
 	public List<Grupo> getGrupos() {
 		return grupos;
 	}
-	
+
 	public void setGrupos(List<Grupo> grupos) {
 		this.grupos = grupos;
 	}
-	
+
 	public List<Permissao> getPermissoes() {
 		return permissoes;
 	}
@@ -71,8 +74,6 @@ public class Usuario implements Serializable {
 	public void setPermissoes(List<Permissao> permissoes) {
 		this.permissoes = permissoes;
 	}
-	
-	
 
 	public Integer getId() {
 		return id;
@@ -109,9 +110,9 @@ public class Usuario implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id +", login=" + login + "]";
+		return "Usuario [id=" + id + ", login=" + login + "]";
 	}
-	
+
 	public String criptografarSenha(String senha) {
 		return new BCryptPasswordEncoder().encode(senha);
 	}

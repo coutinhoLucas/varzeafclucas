@@ -4,13 +4,17 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.cc.varzeafc.daos.UsuarioDAO;
 import br.com.cc.varzeafc.models.Grupo;
@@ -53,17 +57,22 @@ public class HomeController {
 
 	@RequestMapping(method = RequestMethod.GET, value = "/cadastro")
 	public ModelAndView cadastro(Presidente presidente) {
-		return new ModelAndView("usuario/cadastro");
+		return new ModelAndView("cadastro");
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/usuario/add")
-	public String addPresidente(Presidente presidente) {
+	public ModelAndView addPresidente(@Valid Presidente presidente, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+
+		if (bindingResult.hasErrors()) {
+			return cadastro(presidente);
+		}
 		presidente.setGrupos(addGrupo());
 		presidente.getEquipe().setDataCriacao(Calendar.getInstance());
 		presidente.setSenha(presidente.criptografarSenha(presidente.getSenha()));
 		presidente.getEquipe().setPresidente(presidente);
 		usuarioDAO.salva(presidente);
-		return "redirect:/login";
+		redirectAttributes.addFlashAttribute("mensagem", "Cadastro realizado com sucesso.");
+		return new ModelAndView("redirect:/login");
 	}
 
 	private List<Grupo> addGrupo() {

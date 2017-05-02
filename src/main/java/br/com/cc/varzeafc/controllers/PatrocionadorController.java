@@ -1,5 +1,7 @@
 package br.com.cc.varzeafc.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -21,20 +23,27 @@ import br.com.cc.varzeafc.models.Patrocinador;
 public class PatrocionadorController {
 
 	@Autowired
-	PatrocionadorDAO patrocinadorDAO;
+	private PatrocionadorDAO patrocinadorDAO;
 
-	@RequestMapping(method = RequestMethod.GET, value = "/patrocinador/cadastrar")
-	public ModelAndView cadastrar(Patrocinador patrocinador) {
+	@RequestMapping(method = RequestMethod.GET, value = "/patrocinador")
+	public ModelAndView form(Patrocinador patrocinador) {
 		return new ModelAndView("patrocinador/add-patrocinador");
 	}
 
-	@RequestMapping(method = RequestMethod.POST, value = "/patrocinador/add")
+	@RequestMapping(method = RequestMethod.POST, value = "/patrocinador")
 	@CacheEvict(value = "patrocinadores", allEntries = true)
-	public String add(Patrocinador patrocinador, final BindingResult bindingResult,
+	public ModelAndView add(@Valid Patrocinador patrocinador, BindingResult bindingResult,
 			RedirectAttributes redirectAttributes) {
+
+		if (bindingResult.hasErrors()) {
+			return form(patrocinador);
+
+		}
+
 		patrocinadorDAO.salva(patrocinador);
+
 		redirectAttributes.addFlashAttribute("mensagem", "Cadastro realizado com sucesso.");
-		return "redirect:cadastrar";
+		return new ModelAndView("redirect:patrocinador");
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/patrocinadores")

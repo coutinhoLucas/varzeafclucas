@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
@@ -20,14 +22,18 @@ public class Patrocinador {
 	@Expose
 	private Integer id;
 	@Expose
+	@NotBlank(message = "Nome é obrigatório")
 	private String nome;
 	@Expose
+	@NotBlank(message = "CPF é obrigatório")
 	private String cpf;
 	@Expose
 	private String cnpj;
 	@Expose
+	@NotBlank(message = "Nome do representante é obrigatório")
 	private String nomeRepresentante;
 	@Expose
+	@NotBlank(message = "Telefone do representante é obrigatório")
 	private String telefoneRepresentante;
 	@ManyToMany(mappedBy = "patrocinadores", fetch = javax.persistence.FetchType.LAZY)
 	private List<Campeonato> campeonatos;

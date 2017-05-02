@@ -1,9 +1,12 @@
 package br.com.cc.varzeafc.models;
 
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
-
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,34 +15,43 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import org.hibernate.validator.constraints.NotBlank;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.annotations.Expose;
 
 @Entity
 public class Campeonato {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Expose
 	private Integer id;
+	@Expose
+	@NotBlank(message = "Nome é obrigatório")
 	private String nome;
-	private LocalDate dataCriacao;
-	@ManyToMany
-	@JoinTable(name = "CAMPEONATO_PATROCINADOR",
-				joinColumns= @JoinColumn(name ="campeonato_id"),
-				inverseJoinColumns = @JoinColumn(name = "patrocinador_id"))
+	@Temporal(TemporalType.DATE)
+	private Calendar dataCriacao;
+	@ManyToMany(fetch = javax.persistence.FetchType.EAGER)
+	@JoinTable(name = "CAMPEONATO_PATROCINADOR", joinColumns = @JoinColumn(name = "campeonato_id"), inverseJoinColumns = @JoinColumn(name = "patrocinador_id"))
 	private List<Patrocinador> patrocinadores;
 	@ManyToOne
+	@Expose
 	private Temporada temporada;
-	@ManyToOne
-	private StatusCampeonato status;
+	@Enumerated(EnumType.STRING)
+	@Expose
+	private CampeonatoStatus status;
 	@ManyToMany
-	@JoinTable(name = "INSCRICAO",
-				joinColumns= @JoinColumn(name ="campeonato_id"),
-				inverseJoinColumns = @JoinColumn(name = "equipe_id"))
+	@JoinTable(name = "INSCRICAO", joinColumns = @JoinColumn(name = "campeonato_id"), inverseJoinColumns = @JoinColumn(name = "equipe_id"))
 	private List<Equipe> equipes;
-	@OneToMany(mappedBy="campeonato")	
+	@OneToMany(mappedBy = "campeonato")
 	private List<Rodada> rodadas;
 
-	
 	public Integer getId() {
 		return id;
 	}
@@ -56,11 +68,11 @@ public class Campeonato {
 		this.nome = nome;
 	}
 
-	public LocalDate getDataCriacao() {
+	public Calendar getDataCriacao() {
 		return dataCriacao;
 	}
 
-	public void setDataCriacao(LocalDate dataCriacao) {
+	public void setDataCriacao(Calendar dataCriacao) {
 		this.dataCriacao = dataCriacao;
 	}
 
@@ -80,11 +92,11 @@ public class Campeonato {
 		this.temporada = temporada;
 	}
 
-	public StatusCampeonato getStatus() {
+	public CampeonatoStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(StatusCampeonato status) {
+	public void setStatus(CampeonatoStatus status) {
 		this.status = status;
 	}
 
@@ -103,5 +115,13 @@ public class Campeonato {
 	public void setRodadas(List<Rodada> rodadas) {
 		this.rodadas = rodadas;
 	}
-	
+
+	public String toJson() {
+		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+		JsonElement jsonCampeonato = gson.toJsonTree(this);
+		JsonElement jsonStatus = gson.toJsonTree(Arrays.asList(CampeonatoStatus.values()));
+		jsonCampeonato.getAsJsonObject().addProperty("TodosStaus", gson.toJson(jsonStatus));
+		return gson.toJson(jsonCampeonato);
+	}
+
 }
