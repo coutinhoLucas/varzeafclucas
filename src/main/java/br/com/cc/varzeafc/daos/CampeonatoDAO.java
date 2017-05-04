@@ -10,7 +10,6 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import br.com.cc.varzeafc.models.Campeonato;
-import br.com.cc.varzeafc.models.Patrocinador;
 import br.com.cc.varzeafc.models.Temporada;
 
 @Repository

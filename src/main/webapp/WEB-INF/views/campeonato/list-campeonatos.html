@@ -26,8 +26,7 @@
 									<th>Status</th>
 									<th>Patrocinadores</th>
 									<th>Temporada</th>
-									<th>Editar</th>
-									<th>Excluir</th>
+									<th style='text-align: center;'>Acoes</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -41,12 +40,13 @@
 											th:text="${patrocinador.nome}"></div>
 									</td>
 									<td th:text="${campeonato.temporada.ano}"></td>
-									<td><a
-										th:onclick="'campeonato.editar(' + ${campeonato.id} + ')'"
-										class="btn btn-primary editarCampeonato">Editar</a></td>
-									<td><a
-										th:href="@{/campeonato/excluir/} + ${campeonato.id}"
-										class="btn btn-danger">Excluir</a></td>
+									<td style='text-align: center;'>
+										<a	th:onclick="'campeonato.editar(' + ${campeonato.id} + ')'"
+											class="btn btn-primary editarCampeonato">Editar</a>
+									
+										<a th:href="@{/campeonato/excluir/} + ${campeonato.id}"
+										class="btn btn-danger">Excluir</a>
+									</td>
 								</tr>
 							</tbody>
 						</table>

@@ -2,9 +2,6 @@ package br.com.cc.varzeafc.models;
 
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-
 public class StatusCampeonato extends Status{
 
 	private List<Campeonato> campeonatos;

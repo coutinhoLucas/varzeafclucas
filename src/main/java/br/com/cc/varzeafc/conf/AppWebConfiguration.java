@@ -1,6 +1,6 @@
 package br.com.cc.varzeafc.conf;
 
-import java.util.ArrayList;
+
 import java.util.Arrays;
 
 import org.springframework.cache.CacheManager;
@@ -17,9 +17,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 import br.com.cc.varzeafc.formatter.GrupoFormatter;
 import br.com.cc.varzeafc.formatter.PatrocinadorFormatter;
-import br.com.cc.varzeafc.formatter.StringToGrupoConverter;
 import br.com.cc.varzeafc.formatter.TemporadaFormatter;
-import br.com.cc.varzeafc.models.Grupo;
 
 @Configuration
 @EnableWebMvc

@@ -26,8 +26,7 @@
 									<th>CPF</th>
 									<th>CNPJ</th>
 									<th>Telefone representante</th>
-									<th>Editar</th>
-									<th>Excluir</th>
+									<th style='text-align: center;'>Acoes</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -37,11 +36,10 @@
 									<td th:text="${patrocinador.cpf}"></td>
 									<td th:text="${patrocinador.cnpj}"></td>
 									<td th:text="${patrocinador.telefoneRepresentante}"></td>
-									<td>
+									<td style='text-align: center;'>
 										<a th:onclick="'patrocinador.editar(' + ${patrocinador.id} + ')'"
 												 class="btn btn-primary">Editar</a>
-									</td>
-									<td>
+												 
 										<a th:href="@{/patrocinador/excluir/} + ${patrocinador.id}" class="btn btn-danger">Excluir</a>
 									</td>
 								</tr>

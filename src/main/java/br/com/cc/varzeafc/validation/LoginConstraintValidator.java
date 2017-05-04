@@ -6,7 +6,6 @@ import javax.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.cc.varzeafc.daos.UsuarioDAO;
-import br.com.cc.varzeafc.models.Usuario;
 
 public class LoginConstraintValidator implements ConstraintValidator<Login, String> {
 
