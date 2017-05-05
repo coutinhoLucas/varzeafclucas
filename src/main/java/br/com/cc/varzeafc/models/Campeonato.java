@@ -1,11 +1,14 @@
 package br.com.cc.varzeafc.models;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,8 +28,13 @@ import com.google.gson.JsonElement;
 import com.google.gson.annotations.Expose;
 
 @Entity
-public class Campeonato {
+public class Campeonato implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Expose
@@ -36,17 +44,16 @@ public class Campeonato {
 	private String nome;
 	@Temporal(TemporalType.DATE)
 	private Calendar dataCriacao;
-	@ManyToMany(fetch = javax.persistence.FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "CAMPEONATO_PATROCINADOR", joinColumns = @JoinColumn(name = "campeonato_id"), inverseJoinColumns = @JoinColumn(name = "patrocinador_id"))
 	private List<Patrocinador> patrocinadores;
 	@ManyToOne
-	@Expose
 	private Temporada temporada;
 	@Enumerated(EnumType.STRING)
-	@Expose
 	private CampeonatoStatus status;
-	@ManyToMany
-	@JoinTable(name = "INSCRICAO", joinColumns = @JoinColumn(name = "campeonato_id"), inverseJoinColumns = @JoinColumn(name = "equipe_id"))
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "INSCRICAO", joinColumns = @JoinColumn(name = "campeonato_id"), 
+	inverseJoinColumns = @JoinColumn(name = "equipe_id"))
 	private List<Equipe> equipes;
 	@OneToMany(mappedBy = "campeonato")
 	private List<Rodada> rodadas;

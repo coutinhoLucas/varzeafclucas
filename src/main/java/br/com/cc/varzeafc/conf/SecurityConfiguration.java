@@ -10,21 +10,18 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-	
+
 	@Autowired
 	private UserDetailsServiceLogin users;
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests()
-			.antMatchers("/","/add", "/cadastro", "/usuario/add").permitAll()
-			.antMatchers("/sistema").hasAnyRole("PRESIDENTE","PUBLICADOR","ADMIN")
-			.antMatchers("/admin/add","/admin/usuario","/patrocinadores", "/patrocinador").hasAnyRole("ADMIN")
-			.anyRequest().authenticated()
-					.and()
-						.formLogin().loginPage("/login").defaultSuccessUrl("/sistema").permitAll()
-							.and().rememberMe().and().logout().logoutSuccessUrl("/");
+		http.authorizeRequests().antMatchers("/", "/add", "/cadastro", "/usuario/add").permitAll()
+				.antMatchers("/sistema").hasAnyRole("PRESIDENTE", "PUBLICADOR", "ADMIN")
+				.antMatchers("/admin/**").hasAnyRole("ADMIN").anyRequest().authenticated()
+				.and().formLogin().loginPage("/login").defaultSuccessUrl("/sistema").permitAll().and()
+				.rememberMe().and().logout().deleteCookies("JSESSIONID").logoutSuccessUrl("/");
 
 		/*
 		 * EXAMPLE OF AUTHENTICATION AND AUTHORIZATION

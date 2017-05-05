@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
@@ -35,11 +34,8 @@ public class CampeonatoDAO {
 	}
 
 	public void atualizaCampeonato(Campeonato campeonato) {
-		Query query = manager.createQuery("update Campeonato set nome = :nome , status =:status where id = :id");
-		query.setParameter("nome", campeonato.getNome());
-		query.setParameter("status", campeonato.getStatus());
-		query.setParameter("id", campeonato.getId());
-		query.executeUpdate();
+		campeonato.setDataCriacao(buscaPorId(campeonato.getId()).getDataCriacao());
+		manager.merge(campeonato);
 
 	}
 

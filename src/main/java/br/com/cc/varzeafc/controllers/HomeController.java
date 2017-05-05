@@ -7,6 +7,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,17 +24,19 @@ import br.com.cc.varzeafc.models.Usuario;
 
 @Controller
 @Transactional
+@RequestMapping("/")
+@Scope("session")
 public class HomeController {
 
 	@Autowired
 	private UsuarioDAO usuarioDAO;
-
-	@RequestMapping("/")
+	
+	@RequestMapping(method = RequestMethod.GET)
 	public String index() {
 		return "index";
 	}
 
-	@RequestMapping("/add")
+	@RequestMapping("add")
 	public String addAdm() {
 
 		Usuario usuario = new Usuario();
@@ -50,17 +53,17 @@ public class HomeController {
 		return "redirect:/login";
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/login")
+	@RequestMapping(method = RequestMethod.GET, value = "login")
 	public ModelAndView login() {
 		return new ModelAndView("login/login");
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/cadastro")
+	@RequestMapping(method = RequestMethod.GET, value = "cadastro")
 	public ModelAndView cadastro(Presidente presidente) {
 		return new ModelAndView("cadastro");
 	}
 
-	@RequestMapping(method = RequestMethod.POST, value = "/usuario/add")
+	@RequestMapping(method = RequestMethod.POST, value = "usuario/add")
 	public ModelAndView addPresidente(@Valid Presidente presidente, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
 		if (bindingResult.hasErrors()) {

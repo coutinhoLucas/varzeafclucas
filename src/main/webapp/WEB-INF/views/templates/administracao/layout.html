@@ -272,10 +272,10 @@
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Patrocinador<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a th:href="@{/patrocinador}">Cadastrar</a>
+                                    <a th:href="${(#mvc.url('APC#form')).build()}">Cadastrar</a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/patrocinadores}">Listar</a>
+                                    <a th:href="${(#mvc.url('APC#list')).build()}">Listar</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -285,13 +285,13 @@
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Campeonatos<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a th:href="@{/campeonato}">Cadastrar</a>
+                                    <a th:href="${(#mvc.url('ACC#formCampeonato')).build()}">Cadastrar</a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/campeonatos}">Listar</a>
+                                    <a th:href="${(#mvc.url('ACC#list')).build()}">Listar campeonatos</a>
                                 </li>
                                  <li>
-                                    <a th:href="@{/temporada}">Cadastrar temporada</a>
+                                    <a th:href="${(#mvc.url('ACC#formTemporada')).build()}">Cadastrar temporada</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -301,7 +301,7 @@
                             <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
                         </li>
                         <li sec:authorize="hasRole('ROLE_ADMIN')">
-                            <a th:href="@{/admin/usuario}"><i class="fa fa-edit fa-fw"></i> Adicionar usuários</a>
+                            <a th:href="${(#mvc.url('AUC#form')).build()}"><i class="fa fa-edit fa-fw"></i> Adicionar usuários</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
