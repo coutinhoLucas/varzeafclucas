@@ -3,7 +3,6 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{templates/administracao/layout}">
 <head>
-<meta charset="UTF-8">
 <title>Adicionar Local de Partida</title>
 </head>
 <body>
@@ -23,8 +22,12 @@
 							<div class="row">
 								<div class="col-lg-2"></div>
 								<div class="col-lg-8">
-									<form role="form" th:action="${(#mvc.url('ALDPC#add')).build()}"
+									<form role="form"
+										th:action="${(#mvc.url('ALDPC#add')).build()}"
 										th:object="${localPartida}" method="POST">
+
+										<div class="alert alert-success" th:text="${mensagem}"
+											th:if="${not #strings.isEmpty(mensagem)}"></div>
 
 										<div class="alert alert-danger"
 											th:if="${#fields.hasAnyErrors()}">
@@ -40,34 +43,36 @@
 
 											</div>
 										</div>
-										
+
 										<div class="form-group aw-required"
 											th:classappend="${#fields.hasErrors('endereco.logradouro')} ? has-error">
 											<div class="form-group">
-												<input placeholder="Logradouro" th:field="*{endereco.logradouro}"
-													class="form-control" autofocus="autofocus" />
+												<input placeholder="Logradouro"
+													th:field="*{endereco.logradouro}" class="form-control"
+													autofocus="autofocus" />
 
 											</div>
 										</div>
-										
+
 										<div class="form-group aw-required"
 											th:classappend="${#fields.hasErrors('endereco.numero')} ? has-error">
 											<div class="form-group">
-												<input placeholder="NÃºmero" th:field="*{endereco.numero}"
+												<input placeholder="Número" th:field="*{endereco.numero}"
 													class="form-control" autofocus="autofocus" />
 
 											</div>
 										</div>
-										
+
 										<div class="form-group aw-required"
 											th:classappend="${#fields.hasErrors('endereco.complemento')} ? has-error">
 											<div class="form-group">
-												<input placeholder="Complemento" th:field="*{endereco.complemento}"
-													class="form-control" autofocus="autofocus" />
+												<input placeholder="Complemento"
+													th:field="*{endereco.complemento}" class="form-control"
+													autofocus="autofocus" />
 
 											</div>
 										</div>
-										
+
 										<div class="form-group aw-required"
 											th:classappend="${#fields.hasErrors('endereco.bairro')} ? has-error">
 											<div class="form-group">
@@ -76,7 +81,7 @@
 
 											</div>
 										</div>
-										
+
 										<div class="form-group aw-required"
 											th:classappend="${#fields.hasErrors('endereco.cidade')} ? has-error">
 											<div class="form-group">
@@ -85,7 +90,7 @@
 
 											</div>
 										</div>
-										
+
 										<div class="form-group aw-required"
 											th:classappend="${#fields.hasErrors('endereco.uf')} ? has-error">
 											<div class="form-group">
@@ -94,7 +99,7 @@
 
 											</div>
 										</div>
-										
+
 										<div class="form-group aw-required"
 											th:classappend="${#fields.hasErrors('endereco.cep')} ? has-error">
 											<div class="form-group">
@@ -103,8 +108,8 @@
 
 											</div>
 										</div>
-																	
-										
+
+
 										<button type="submit" class="btn btn-success">Salvar</button>
 										<button type="reset" class="btn btn-default">Reset</button>
 									</form>

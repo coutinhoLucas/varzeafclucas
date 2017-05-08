@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.cc.varzeafc.daos.EnderecoDAO;
 import br.com.cc.varzeafc.daos.LocalDePartidaDAO;
 import br.com.cc.varzeafc.models.LocalPartida;
 
@@ -26,6 +27,9 @@ public class AdminLocalDePartidaController {
 
 	@Autowired
 	private LocalDePartidaDAO localDePartidaDAO;
+	
+	@Autowired
+	private EnderecoDAO enderecoDAO;
 
 	@RequestMapping(method = RequestMethod.GET, value = "localPartida")
 	public ModelAndView form(LocalPartida localPartida) {
@@ -41,7 +45,8 @@ public class AdminLocalDePartidaController {
 			return form(localPartida);
 
 		}
-
+		
+		enderecoDAO.salva(localPartida.getEndereco());
 		localDePartidaDAO.salva(localPartida);
 
 		redirectAttributes.addFlashAttribute("mensagem", "Local de Partida cadastrado com sucesso.");
@@ -51,8 +56,8 @@ public class AdminLocalDePartidaController {
 	@RequestMapping(method = RequestMethod.GET, value = "locaisPartida")
 	@Cacheable("locaisPartida")
 	public ModelAndView list() {
-		ModelAndView view = new ModelAndView("LocalPartida/list-localPartida");
-		view.addObject("locaisPartida", localDePartidaDAO.listarTodos());
+		ModelAndView view = new ModelAndView("localPartida/list-localPartida");
+		view.addObject("locaisPartidas", localDePartidaDAO.listarTodos());
 		return view;
 	}
 

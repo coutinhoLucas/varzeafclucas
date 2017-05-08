@@ -8,7 +8,6 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import br.com.cc.varzeafc.models.LocalPartida;
-import br.com.cc.varzeafc.models.Patrocinador;
 
 @Repository
 public class LocalDePartidaDAO {

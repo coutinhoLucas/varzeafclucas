@@ -53,5 +53,5 @@ public class LocalPartida {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
+	
 }
