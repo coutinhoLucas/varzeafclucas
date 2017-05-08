@@ -33,7 +33,7 @@ public class AdminLocalDePartidaController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "localPartida")
-	@CacheEvict(value = "LocaisPartida", allEntries = true)
+	@CacheEvict(value = "locaisPartida", allEntries = true)
 	public ModelAndView add(@Valid LocalPartida localPartida, BindingResult result,
 			RedirectAttributes redirectAttributes) {
 
@@ -48,11 +48,11 @@ public class AdminLocalDePartidaController {
 		return new ModelAndView("redirect:/admin/localPartida");
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "LocaisPartida")
-	@Cacheable("LocaisPartida")
+	@RequestMapping(method = RequestMethod.GET, value = "locaisPartida")
+	@Cacheable("locaisPartida")
 	public ModelAndView list() {
 		ModelAndView view = new ModelAndView("LocalPartida/list-localPartida");
-		view.addObject("LocaisPartida", localDePartidaDAO.listarTodos());
+		view.addObject("locaisPartida", localDePartidaDAO.listarTodos());
 		return view;
 	}
 
@@ -63,7 +63,7 @@ public class AdminLocalDePartidaController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "localPartida/{id}")
-	@CacheEvict(value = "LocaisPartida", allEntries = true)
+	@CacheEvict(value = "locaisPartida", allEntries = true)
 	public ModelAndView update(@PathVariable("id") Integer id, @Valid LocalPartida localPartida, BindingResult result,
 			RedirectAttributes redirectAttributes) {
 
@@ -75,15 +75,15 @@ public class AdminLocalDePartidaController {
 		redirectAttributes.addFlashAttribute("mensagem",
 				"Local de Partida "+localPartida.getNomeLocalPartida() +" atualizado com sucesso.");
 
-		return new ModelAndView("redirect:/admin/LocaisPartida");
+		return new ModelAndView("redirect:/admin/locaisPartida");
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "localPartida/excluir/{id}")
-	@CacheEvict(value = "LocaisPartida", allEntries = true)
+	@CacheEvict(value = "locaisPartida", allEntries = true)
 	public String remove(@PathVariable("id") Integer id) {
 		LocalPartida localPartida = localDePartidaDAO.buscaPorId(id);
 		localDePartidaDAO.excluir(localPartida);
-		return "redirect:/admin/LocaisPartida";
+		return "redirect:/admin/locaisPartida";
 	}
 
 }
